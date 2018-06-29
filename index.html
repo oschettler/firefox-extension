@@ -4,17 +4,38 @@
     <meta charset="utf-8">
     <title>VoiCo - Voice Codes for Websites</title>
     <link rel="shortcut icon" href="/icons/voico-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Use our Firefox extension to show a Voice Code on every website">
+    <meta name="author" content="Dr. Olav Schettler">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Dr. Olav Schettler",
+      "url": "https://schettler.net",
+      "sameAs": [
+        "https://www.facebook.com/olav.schettler",
+        "https://www.xing.com/profile/Olav_Schettler",
+        "https://www.linkedin.com/in/olavschettler/",
+        "https://plus.google.com/u/0/+OlavSchettlerBonn"
+      ]
+    }
+    </script>
+
     <meta name="keywords" content="voice, voice code, short code, qr code">
     <style>
         body {
             font-family: Helvetica, sans-serif;
-            font-size: 14px;
+            font-size: 16px;
             text-align: center;
+            line-height: 1.5em;
         }
         .content {
-            margin: 200px auto;
+            margin: 100px auto;
             width: 600px;
+        }
+        img.screenshot {
+            max-width: 50%;
         }
         footer {
             position: fixed;
@@ -32,13 +53,20 @@
 <body>
     <div class="container">
         <div class="content">
-            <h1>VoiCo</h1>
+            <h1>Voice Code</h1>
 
-            <p>Voice Codes für jede Website.</p>
+            <p>QR-Codes für jede Website.</p>
+            <p>Zusätzlich für Rezepte auf Chefkoch:<br>
+                Rufe den Chefkoch Skill für Alexa mit den ausgewählten Rezept auf.</p>
+            <p><img class="screenshot" src="/voico.jpg"></p>
+            <p>Installiere unsere <a href="">Firefox-Extension</a>!</p>
+            <p>Die Extension ist open source. Wenn du Wünsche hast oder einen Fehler
+                melden willst, kannst du das gerne <a
+                        href="https://github.com/oschettler/voico-extension">auf Github</a> tun.</p>
         </div>
 
         <footer>
-            <p>&copy; 2018 Dr. Olav Schettler. Icons by Smashicons www.flaticon.com (CC 3.0 BY)</p>
+            <p>&copy; 2018 <a href="https://schettler.net/imprint/">Dr. Olav Schettler</a>. Icons by Smashicons www.flaticon.com (CC 3.0 BY)</p>
         </footer>
     </div>
 </body>
