@@ -17,13 +17,23 @@
  */
 const VOICO = 'https://voico.de';
 
-function fetchForm(tabs) {
-  let url = VOICO + '/api/?url='
-      + encodeURIComponent(tabs[0].url)
-      + '&title=' + encodeURIComponent(tabs[0].title);
+function showInfo(tabs) {
+  let qr_url = VOICO + '/qr/?url='
+      + encodeURIComponent(tabs[0].url);
 
-  location.href = url;
-  return;
+  document.getElementById('qr').src = qr_url;
+
+  let re = new RegExp('^https://www.chefkoch.de/rezepte/(\d+)');
+  let match = tabs[0].url.match(re);
+  let id;
+  if (match) {
+    let id = match[1];
+
+    let u = new SpeechSynthesisUtterance();
+    u.text = 'Alexa, starte Chefkoch mit Rezept ' + id;
+    u.lang = 'de-DE';
+    speechSynthesis.speak(u);
+  }
 }
 
 function onError(error) {
@@ -31,4 +41,4 @@ function onError(error) {
 }
 
 browser.tabs.query({active: true, currentWindow: true})
-  .then(fetchForm, onError);
+  .then(showInfo, onError);

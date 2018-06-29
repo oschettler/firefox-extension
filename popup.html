@@ -4,12 +4,21 @@
   <head>
     <meta charset="utf-8">
     <style>
-    html, body { width: 200px; height: 200px; }
+    html, body {
+      min-width: 200px;
+      min-height: 200px;
+      font-family: Helvetica, sans-serif;
+      font-size: 14px;
+    }
     .hidden { display: none; }
+    img { display: block; }
     </style>
   </head>
 
 <body>
+  <div class="container">
+    <img id="qr" src="https://voico.de/icons/voico-96.png">
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>
