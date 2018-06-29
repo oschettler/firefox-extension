@@ -17,21 +17,36 @@
  */
 const VOICO = 'https://voico.de';
 
+function sayAlexa(id) {
+  let u = new SpeechSynthesisUtterance();
+  u.lang = 'de-DE';
+
+  return function () {
+    u.text = 'Alexa, starte Chefkoch mit Rezept ' + id;
+    speechSynthesis.speak(u);
+  }
+}
+
 function showInfo(tabs) {
+  let p = document.getElementById('btn');
   let qr_url = VOICO + '/qr/?url='
       + encodeURIComponent(tabs[0].url);
 
   document.getElementById('qr').src = qr_url;
 
-  let match = tabs[0].url.match(/^https:\/\/www.chefkoch.de\/rezepte\/(d+)/);
-  let id;
+  let match = tabs[0].url.match(/^https:\/\/www\.chefkoch\.de\/rezepte\/(\d+)/);
+
+  console.log("MATCH", match);
+
   if (match) {
     let id = match[1].split('').join(' ');
 
-    let u = new SpeechSynthesisUtterance();
-    u.text = 'Alexa, starte Chefkoch mit Rezept ' + id;
-    u.lang = 'de-DE';
-    speechSynthesis.speak(u);
+    let btn = document.createElement('button');
+    btn.innerText = 'Dieses Rezept auf deiner Alexa!';
+    btn.onclick = sayAlexa(id);
+    p.appendChild(btn);
+    p.appendChild(document.createTextNode(
+        'Dein Browser spricht mit Alexa und startet so den Chefkoch Skill.'))
   }
 }
 
