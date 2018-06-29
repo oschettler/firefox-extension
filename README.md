@@ -1,3 +1,3 @@
-# firefox-extension
+# VoiCo Firefox Extension
 
-Save bookmarks from Firefox into Knowfox
+Show a Voice Code on every website.
