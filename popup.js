@@ -23,11 +23,10 @@ function showInfo(tabs) {
 
   document.getElementById('qr').src = qr_url;
 
-  let re = new RegExp('^https://www.chefkoch.de/rezepte/(\d+)');
-  let match = tabs[0].url.match(re);
+  let match = tabs[0].url.match(/^https:\/\/www.chefkoch.de\/rezepte\/(d+)/);
   let id;
   if (match) {
-    let id = match[1];
+    let id = match[1].split('').join(' ');
 
     let u = new SpeechSynthesisUtterance();
     u.text = 'Alexa, starte Chefkoch mit Rezept ' + id;
