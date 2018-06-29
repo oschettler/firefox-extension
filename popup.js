@@ -1,5 +1,5 @@
 /**
- * Knowfox Extension for Firefox - Personal Knowledge Management
+ * VoiCo Extension for Firefox
  * Copyright (C) 2018 Olav Schettler
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,10 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-const KNOWFOX = 'https://knowfox.com';
+const VOICO = 'https://voico.de';
 
 function fetchForm(tabs) {
-  let url = KNOWFOX + '/bookmark?url='
+  let url = VOICO + '/api/?url='
       + encodeURIComponent(tabs[0].url)
       + '&title=' + encodeURIComponent(tabs[0].title);
 
