@@ -51,23 +51,23 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-            <h1>Voice Code</h1>
+<div class="container">
+    <div class="content">
+        <h1>Voice Code</h1>
 
-            <p>QR-Codes für jede Website.</p>
-            <p>Zusätzlich für Rezepte auf Chefkoch:<br>
-                Rufe den Chefkoch Skill für Alexa mit den ausgewählten Rezept auf.</p>
-            <p><img class="screenshot" src="/voico.jpg"></p>
-            <p>Installiere die <a href="https://addons.mozilla.org/de/firefox/addon/voico/">Firefox-Extension</a>!</p>
-            <p>Die Extension ist open source. Wenn du Wünsche hast oder einen Fehler
-                melden willst, kannst du das gerne <a
-                        href="https://github.com/oschettler/voico-extension">auf Github</a> tun.</p>
-        </div>
-
-        <footer>
-            <p>&copy; 2018 <a href="https://schettler.net/imprint/">Dr. Olav Schettler</a>. Icons by Smashicons www.flaticon.com (CC 3.0 BY)</p>
-        </footer>
+        <p>QR-Codes für jede Website.</p>
+        <p>Zusätzlich für Rezepte auf Chefkoch:<br>
+            Rufe den Chefkoch Skill für Alexa mit den ausgewählten Rezept auf.</p>
+        <p><img class="screenshot" src="/voico.jpg"></p>
+        <p>Installiere die <a href="https://addons.mozilla.org/de/firefox/addon/voico/">Firefox-Extension</a>!</p>
+        <p>Die Extension ist open source. Wenn du Wünsche hast oder einen Fehler
+            melden willst, kannst du das gerne <a
+                    href="https://github.com/oschettler/voico-extension">auf Github</a> tun.</p>
     </div>
+
+    <footer>
+        <p>&copy; 2018 <a href="https://schettler.net/imprint/">Dr. Olav Schettler</a>. Icons by Smashicons www.flaticon.com (CC 3.0 BY)</p>
+    </footer>
+</div>
 </body>
 </html>

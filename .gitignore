@@ -61,7 +61,7 @@ typings/
 .DS_Store
 
 # PHPStorm
-.idea
+.idea/
 
 # PHP
-vendor
+vendor/
