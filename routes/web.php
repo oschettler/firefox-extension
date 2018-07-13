@@ -14,3 +14,8 @@
 $router->get('/', function () use ($router) {
     return view('home');
 });
+
+$router->get('/qr', 'QrController@index');
+
+$router->get('/ck/encode/{url:\S+}', 'CkController@encode');
+$router->get('/ck/{w}', 'CkController@decode');
