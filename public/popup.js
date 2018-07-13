@@ -22,7 +22,7 @@ function sayAlexa(words) {
   u.lang = 'de-DE';
 
   return function () {
-    u.text = 'Alexa, starte Chefkoch mit Rezept Code ' + words;
+    u.text = 'Alexa, starte Chefkoch mit Rezept Code, ' + words;
     speechSynthesis.speak(u);
   }
 }
