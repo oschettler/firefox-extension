@@ -17,14 +17,28 @@
  */
 const VOICO = 'https://voico.de';
 
-function sayAlexa(id) {
+function sayAlexa(words) {
   let u = new SpeechSynthesisUtterance();
   u.lang = 'de-DE';
 
   return function () {
-    u.text = 'Alexa, starte Chefkoch mit Rezept ' + id;
+    u.text = 'Alexa, starte Chefkoch mit Rezept Code ' + words;
     speechSynthesis.speak(u);
   }
+}
+
+function get(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      callback(xhr.responseText);
+    }
+    else {
+      console.log("GET failed", xhr.status);
+    }
+  };
+  xhr.send();
 }
 
 function showInfo(tabs) {
@@ -39,14 +53,14 @@ function showInfo(tabs) {
   console.log("MATCH", match);
 
   if (match) {
-    let id = match[1].split('').join(' ');
-
-    let btn = document.createElement('button');
-    btn.innerText = 'Dieses Rezept auf deiner Alexa!';
-    btn.onclick = sayAlexa(id);
-    p.appendChild(btn);
-    p.appendChild(document.createTextNode(
-        'Dein Browser spricht mit Alexa und startet so den Chefkoch Skill.'))
+    get(VOICO + '/ck/encode/' + tabs[0].url, function (words) {
+      let btn = document.createElement('button');
+      btn.innerText = 'Dieses Rezept auf deiner Alexa!';
+      btn.onclick = sayAlexa(words);
+      p.appendChild(btn);
+      p.appendChild(document.createTextNode(
+          'Dein Browser spricht mit Alexa und startet so den Chefkoch Skill.'))
+    });
   }
 }
 
