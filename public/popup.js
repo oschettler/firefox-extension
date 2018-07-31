@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 const VOICO = 'https://voico.de';
+const SHORTCODE = 'https://08sn6hlbok.execute-api.eu-west-1.amazonaws.com/default';
 
 function sayAlexa(words) {
   let u = new SpeechSynthesisUtterance();
@@ -27,15 +28,15 @@ function sayAlexa(words) {
   }
 }
 
-function get(url, callback) {
+function post(url, callback) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
+  xhr.open('POST', url);
   xhr.onload = function() {
     if (xhr.status === 200) {
       callback(xhr.responseText);
     }
     else {
-      console.log("GET failed", xhr.status);
+      console.log("POST failed", xhr.status);
     }
   };
   xhr.send();
@@ -53,7 +54,7 @@ function showInfo(tabs) {
   console.log("MATCH", match);
 
   if (match) {
-    get(VOICO + '/ck/encode/' + tabs[0].url, function (words) {
+    post(SHORTCODE + '?url=' + encodeURIComponent(tabs[0].url), function (words) {
       let btn = document.createElement('button');
       btn.innerText = 'Dieses Rezept auf deiner Alexa!';
       btn.onclick = sayAlexa(words);
