@@ -17,20 +17,27 @@
  */
 const VOICO = 'https://voico.de';
 const SHORTCODE = 'https://08sn6hlbok.execute-api.eu-west-1.amazonaws.com/default';
+const ALEXA_PROMPT = 'Alexa, starte Chefkoch mit Rezept Code, ';
 
 function sayAlexa(words) {
   let u = new SpeechSynthesisUtterance();
   u.lang = 'de-DE';
 
   return function () {
-    u.text = 'Alexa, starte Chefkoch mit Rezept Code, ' + words;
+    u.text = ALEXA_PROMPT + words;
     speechSynthesis.speak(u);
   }
 }
 
-function post(url, callback) {
-  var xhr = new XMLHttpRequest();
+function post(url, data, callback) {
+  const xhr = new XMLHttpRequest();
+  if (typeof callback === 'undefined') {
+    callback = data;
+    data = {};
+  }
   xhr.open('POST', url);
+  xhr.setRequestHeader('Content-type', 'application/json');
+  
   xhr.onload = function() {
     if (xhr.status === 200) {
       callback(xhr.responseText);
@@ -39,11 +46,14 @@ function post(url, callback) {
       console.log("POST failed", xhr.status);
     }
   };
-  xhr.send();
+  xhr.send(JSON.stringify(data));
 }
 
 function showInfo(tabs) {
-  let p = document.getElementById('btn');
+  const p_btn = document.getElementById('btn');
+  const p_command = document.getElementById('command');
+  const input_code = document.getElementById('code');
+
   let qr_url = VOICO + '/qr/?url='
       + encodeURIComponent(tabs[0].url);
 
@@ -58,9 +68,12 @@ function showInfo(tabs) {
       let btn = document.createElement('button');
       btn.innerText = 'Dieses Rezept auf deiner Alexa!';
       btn.onclick = sayAlexa(words);
-      p.appendChild(btn);
-      p.appendChild(document.createTextNode(
+      p_btn.appendChild(btn);
+      p_btn.appendChild(document.createTextNode(
           'Dein Browser spricht mit Alexa und startet so den Chefkoch Skill.'))
+      p_command.appendChild(document.createTextNode(
+        ALEXA_PROMPT + words));
+      input_code.value = words;
     });
   }
 }
@@ -71,3 +84,15 @@ function onError(error) {
 
 browser.tabs.query({active: true, currentWindow: true})
   .then(showInfo, onError);
+
+function feedback(e) {
+  e.preventDefault();
+
+  const form_feedback = document.getElementById('feedback');
+  const p_alert = document.getElementById('alert');
+  let values = form_feedback.elements.map(el => { name: el.name, value: el.value });
+  post(VOICO + '/feedback', values, () => {
+    p_alert.appendChild(document.createTextNode('Vielen Dank!'));
+    setTimeout(() => { p_alert.innerHTML = ''; }, 3000);
+  });
+} 
