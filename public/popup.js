@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-//const VOICO = 'https://voico.de';
-const VOICO = 'http://voico.test';
+const VOICO = 'https://voico.de';
+//const VOICO = 'http://voico.test';
 const SHORTCODE = 'https://08sn6hlbok.execute-api.eu-west-1.amazonaws.com/default';
 const ALEXA_PROMPT = 'Alexa, starte Chefkoch mit Rezept-Code: ';
 
