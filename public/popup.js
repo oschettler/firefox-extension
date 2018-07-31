@@ -15,9 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-const VOICO = 'https://voico.de';
+//const VOICO = 'https://voico.de';
+const VOICO = 'http://voico.test';
 const SHORTCODE = 'https://08sn6hlbok.execute-api.eu-west-1.amazonaws.com/default';
-const ALEXA_PROMPT = 'Alexa, starte Chefkoch mit Rezept Code, ';
+const ALEXA_PROMPT = 'Alexa, starte Chefkoch mit Rezept-Code: ';
 
 function sayAlexa(words) {
   let u = new SpeechSynthesisUtterance();
@@ -27,6 +28,10 @@ function sayAlexa(words) {
     u.text = ALEXA_PROMPT + words;
     speechSynthesis.speak(u);
   }
+}
+
+function capWords(words) {
+  return words.replace(/((\s|^)\S)/gi, m => m.toUpperCase()); 
 }
 
 function post(url, data, callback) {
@@ -69,11 +74,9 @@ function showInfo(tabs) {
       btn.innerText = 'Dieses Rezept auf deiner Alexa!';
       btn.onclick = sayAlexa(words);
       p_btn.appendChild(btn);
-      p_btn.appendChild(document.createTextNode(
-          'Dein Browser spricht mit Alexa und startet so den Chefkoch Skill.'))
       p_command.appendChild(document.createTextNode(
-        ALEXA_PROMPT + words));
-      input_code.value = words;
+        ALEXA_PROMPT + capWords(words.replace(',', ', '))));
+        input_code.value = words;
     });
   }
 }
@@ -82,17 +85,24 @@ function onError(error) {
   console.log(`Error: ${error}`);
 }
 
-browser.tabs.query({active: true, currentWindow: true})
-  .then(showInfo, onError);
-
 function feedback(e) {
   e.preventDefault();
 
   const form_feedback = document.getElementById('feedback');
   const p_alert = document.getElementById('alert');
-  let values = form_feedback.elements.map(el => { name: el.name, value: el.value });
+  const values = {
+    code: form_feedback.elements.code.value,
+    worked: e.target.value
+  };
+  
   post(VOICO + '/feedback', values, () => {
-    p_alert.appendChild(document.createTextNode('Vielen Dank!'));
-    setTimeout(() => { p_alert.innerHTML = ''; }, 3000);
+    p_alert.appendChild(document.createTextNode('Vielen Dank für die Rückmeldung!'));
+    setTimeout(() => { p_alert.innerHTML = ''; }, 2000);
   });
-} 
+}
+
+browser.tabs.query({active: true, currentWindow: true})
+  .then(showInfo, onError);
+
+document.getElementById('yes').onclick = feedback;
+document.getElementById('no').onclick = feedback;

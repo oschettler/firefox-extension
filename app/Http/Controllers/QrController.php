@@ -13,7 +13,7 @@ class QrController extends Controller
     public function index(Request $request)
     {
         $renderer = new ImageRenderer(
-            new RendererStyle(400),
+            new RendererStyle(300),
             new ImagickImageBackEnd()
         );
         $writer = new Writer($renderer);

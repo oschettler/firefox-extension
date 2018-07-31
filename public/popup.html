@@ -5,27 +5,38 @@
     <meta charset="utf-8">
     <style>
     html, body {
-      min-width: 200px;
-      min-height: 200px;
+      min-width: 420px;
+      min-height: 500px;
       font-family: Helvetica, sans-serif;
       font-size: 14px;
       line-height: 1.5em;
     }
     .hidden { display: none; }
     img { display: block; }
-    p {
+    p, img {
       margin: 0 auto;
       text-align: center;
-      max-width: 300px;
+      max-width: 460px;
     }
-    #feedback {
-      display: flexbox;
+    form {
+      position: relative;
+    }
+    .buttons {
+      margin-top: 4px;
+      display: flex;
       justify-content: center;
     }
     #command {
+      margin: 10px;
+      padding: 6px;
       font-style: italic;
+      background-color: #EEE;
     }
     #alert {
+      position: absolute;
+      top: -26px;
+      left: 10%;
+      width: 80%;
       border-color: #618f30;
       background-color: #dff0d8;
     }
@@ -42,7 +53,10 @@
       cursor: pointer;
     }
     .feedback {
+      margin: 0 10px;
+      min-width: 4em; 
       background-color: white;
+      color: black;
     }
     </style>
   </head>
@@ -51,14 +65,15 @@
   <div class="container">
     <img id="qr" src="https://voico.de/icons/voico-96.png">
     <p id="btn"></p>
-    <p>Voice Codes sind ein Experiment. Wir wissen, dass sie noch nicht perfekt funktionieren.
-      Zur Verbesserung der Erkennung hilft uns dein Feedback sehr. Hat Alexa das Rezept aufgerufen?</p>
     <p id="command"></p>
-    <form id="feedback" onsubmit="feedback()">
+    <p>Voice Codes sind ein Experiment.<br>Hat Alexa das Rezept aufgerufen?</p>
+    <form id="feedback">
       <p id="alert"></p>
       <input id="code" type="hidden" name="code">
-      <button type="submit" class="feedback" name="worked" value="yes">ja</button>
-      <button type="submit" class="feedback" name="worked" value="no">nein</button>
+      <div class="buttons">
+        <button id="yes" type="submit" class="feedback" name="worked" value="yes">ja</button>
+        <button id="no" type="submit" class="feedback" name="worked" value="no">nein</button>
+      </div>
     </form>
   </div>
   <script src="popup.js"></script>
